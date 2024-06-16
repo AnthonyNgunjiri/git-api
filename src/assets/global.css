@@ -1,0 +1,166 @@
+*{
+    font-size:1.02rem;
+    margin: 0%;
+    box-sizing: content-box;
+}
+.header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #070f2b;
+    color: #ccd2da;
+   border-radius: 4px;
+   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   position: fixed;
+   width:100%;
+   margin-top: -2.9rem;
+}
+ .header a{
+    color: #ccd2da;
+ }
+ .header h1{
+    text-transform: uppercase;
+    font-weight: 400;
+ }
+ .fill button{
+    height: 2.4rem;
+
+ }
+ .fill input{
+  height: 2rem;
+  border-color: 2px solid #ccd2da;
+ }
+ .profile{
+   display: flex; 
+margin-left: 2rem;
+gap: 3rem;
+margin-top: 3rem;
+
+ }
+ .content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+.heading{
+   font-size: 3rem;
+   margin: 2rem;
+}
+ .repo{
+    border-radius: 10px;
+   object-fit: cover;
+    display: grid;
+   grid-template-columns:repeat(2,2fr);
+   padding-left: 2rem;
+   padding-top: 2rem;
+   gap: 2rem;
+  
+ }
+ .git{
+    border: 2px solid black;
+    border-radius: 10px;
+    padding-bottom:0;
+    width:280px;
+    position:static;
+  
+ }
+.tab{
+object-fit: cover;
+padding: 0;
+}
+
+  .details{
+ 
+line-height: 2ch;
+font-size:smaller;
+
+
+  }
+  .img{
+    background: url(/src/assets/gil.jpeg) no-repeat center/cover;
+   
+    height: 280px;
+    width: 280px; 
+    border-radius: 10px;
+}
+ .img img{
+   height: 280px;
+   width: 280px; 
+   border-radius: 10px;
+
+ }
+  .btn{
+   width:94%;
+    height: 8vh;
+    border-radius: 6px;
+    background-color: #070f2b;
+    color: #ccd2da;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+  .card{
+   display: grid;
+   border-radius: 10px;
+   width: 440px;
+   border:2px solid cornsilk;
+   background-color:cornsilk;
+   height: 200px;
+  }
+  .list{
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   gap: 2rem;
+   text-transform: capitalize;
+   list-style: none;
+   background-color: #FFDB5C;    
+   height: 10vh;
+   object-fit: cover;
+   border-radius: 10px;
+  }
+  .task{
+   text-transform: capitalize;
+  }
+  .prof{
+   object-fit: cover;
+   display: grid;
+  grid-template-columns:repeat(5,1fr);
+  padding-left:3px;
+  padding-top: 3px;
+  gap: 2rem;
+ 
+}
+.card2{
+   display: flex;
+   flex-direction: column;
+   border-radius: 10px;
+   width: 120px;
+   border:2px solid cornsilk;
+   background-color:cornsilk;
+   height: 120px;
+   align-items: center;
+  }
+   .card2 img{
+      width: 40px;
+      height: 40px;
+      
+   }
+
+   .card2 button{
+      
+         width:100%;
+         height: 4vh;
+         border-radius: 6px;
+         background-color: #070f2b;
+         color: #ccd2da;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         font-size: small;
+         gap: 3px;
+      
+   }
