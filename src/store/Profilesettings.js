@@ -11,8 +11,8 @@ const useProfileSettings = create((set) => ({
   following: "",
   location: "",
   stars: "",
-  forks:"",
-  repos:"",
+  forks: "",
+  repos: "",
 
   setAvatar: (avatar) => set(() => ({ avatar })),
   setGithub: (github) => set(() => ({ github })),
@@ -29,7 +29,6 @@ const useProfileSettings = create((set) => ({
   fetchUserProfile: async (github) => {
     try {
       const response = await fetch(`https://api.github.com/users/${github}`);
-      
       const data = await response.json();
       set({
         avatar: data.avatar_url,
@@ -41,8 +40,8 @@ const useProfileSettings = create((set) => ({
         followers: data.followers,
         following: data.following,
         location: data.location,
-         stars:data.stargazers_count,
-         forks:data.forks_count,
+        stars: data.stargazers_count,
+        forks: data.forks_count,
       });
     } catch (error) {
       console.error("Failed to fetch user profile:", error);

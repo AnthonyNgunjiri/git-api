@@ -107,7 +107,7 @@ font-size:smaller;
    border-radius: 10px;
    width: 440px;
    border:2px solid cornsilk;
-   background-color:cornsilk;
+   background-color:#f1f1e6;
    height: 200px;
   }
   .list{
@@ -117,7 +117,7 @@ font-size:smaller;
    gap: 2rem;
    text-transform: capitalize;
    list-style: none;
-   background-color: #FFDB5C;    
+   background-color:#fff7d6;  
    height: 10vh;
    object-fit: cover;
    border-radius: 10px;

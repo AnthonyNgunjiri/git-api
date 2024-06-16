@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../assets/global.css";
 import { IoLocationOutline } from "react-icons/io5";
-import { PiBuildingsFill } from "react-icons/pi";
 import { FaBook } from "react-icons/fa";
 import { IoIosPeople } from "react-icons/io";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
@@ -13,10 +12,10 @@ import useProfileSettings from "./Profilesettings";
 const Gitprofile = () => {
   const [data, setData] = useState({});
   const [search, setSearch] = useState("");
-  const [repositories, setRespositories] = useState([]);
+  const [repositories, setRepositories] = useState([]);
   const [follows, setFollows] = useState([]);
   const [followings, setFollowings] = useState([]);
-  const [loading,Setlading] = useState("");
+  const [loading, setLoading] = useState(false);
   const avatar = useProfileSettings((state) => state.avatar);
   const github = useProfileSettings((state) => state.github);
   const userName = useProfileSettings((state) => state.username);
@@ -28,15 +27,43 @@ const Gitprofile = () => {
   const location = useProfileSettings((state) => state.location);
   const stars = useProfileSettings((state) => state.stars);
   const forks = useProfileSettings((state) => state.forks);
-  const fetchUserProfile = useProfileSettings(
-    (state) => state.fetchUserProfile
-  );
+  const fetchUserProfile = useProfileSettings((state) => state.fetchUserProfile);
 
   useEffect(() => {
-    if (github) {
-      fetchUserProfile(github);
+   
+    const defaultUser = "github";
+    fetchUserProfile(defaultUser).then(() => {
+     
+      fetchUserDetails(defaultUser);
+    });
+  }, []);
+
+  const fetchUserDetails = async (username) => {
+    setLoading(true);
+    try {
+      const profile = await fetch(`https://api.github.com/users/${username}`);
+      const profileJson = await profile.json();
+
+      const repos = await fetch(profileJson.repos_url);
+      const repoJson = await repos.json();
+
+      const followers = await fetch(profileJson.followers_url);
+      const followersJson = await followers.json();
+
+      const followingUrl = profileJson.following_url.replace("{/other_user}", "");
+      const followings = await fetch(followingUrl);
+      const followingsJson = await followings.json();
+
+      setData(profileJson);
+      setRepositories(repoJson);
+      setFollows(followersJson);
+      setFollowings(followingsJson);
+    } catch (error) {
+      console.error("Failed to fetch user details:", error);
+    } finally {
+      setLoading(false);
     }
-  }, [userName, fetchUserProfile]);
+  };
 
   const onchangeHandler = (e) => {
     setSearch(e.target.value);
@@ -45,24 +72,7 @@ const Gitprofile = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     fetchUserProfile(search);
-    const profile = await fetch(`https://api.github.com/users/${github}`);
-    const profileJson = await profile.json();
-    // console.log(profilejson);
-
-    const repos = await fetch(profileJson.repos_url);
-    const repoJson = await repos.json();
-    const follower = await fetch(profileJson.followers_url);
-    const followerJson = await follower.json();
-    const followingUrl = profileJson.following_url.replace("{/other_user}", "");
-    const followings = await fetch(followingUrl);
-    const followingJson = await followings.json();
-
-    if (profileJson) {
-      setData(profileJson);
-      setRespositories(repoJson);
-      setFollows(followerJson);
-      setFollowings(followingJson);
-    }
+    fetchUserDetails(search);
   };
 
   return (
@@ -91,12 +101,12 @@ const Gitprofile = () => {
           </div>
           <div>
             <div className="tab">
-              <h2>{userName} Github</h2>
+              <h2>{userName}</h2>
               <p>{github}</p>
               <p className="details">{description}</p>
               <button className="btn">
                 <FaArrowUpRightFromSquare />
-                <a href={view} target="_blank">
+                <a href={view} target="_blank" rel="noopener noreferrer">
                   View on Github
                 </a>
               </button>
@@ -120,12 +130,13 @@ const Gitprofile = () => {
           </div>
         </div>
         <section className="content">
-        <h1 className="heading">Respositories</h1>
+          <h1 className="heading">Repositories</h1>
           <div className="repo">
             {repositories.map((repo) => (
               <button className="card" key={repo.id}>
-                <a href={repo.html_url}></a>
-                <h2 className="task">{repo.name}</h2>
+                <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
+                  <h2 className="task">{repo.name}</h2>
+                </a>
                 <p>{repo.description}</p>
                 <ul className="list">
                   <li>
@@ -143,28 +154,25 @@ const Gitprofile = () => {
           <h1 className="heading">Followers</h1>
           <div className="prof">
             {follows.map((follow) => (
-              <div className="card2"key={follow.id}>
-                <img src={follow.avatar_url}></img>
+              <div className="card2" key={follow.id}>
+                <img src={follow.avatar_url} alt={follow.login} />
                 <h2 className="task">{follow.login}</h2>
                 <button>
-                  view<a href={follow.html_url} target="_blank"></a>
-                  {follow.login}
+                  <a href={follow.html_url} target="_blank" rel="noopener noreferrer">
+                    View {follow.login}
+                  </a>
                 </button>
               </div>
             ))}
           </div>
-          <h1 className="heading">following</h1>
+          <h1 className="heading">Following</h1>
           <div className="prof">
             {followings.map((foll) => (
               <div className="card2" key={foll.id}>
                 <img src={foll.avatar_url} alt={foll.login} />
                 <h2 className="task">{foll.login}</h2>
                 <button>
-                  <a
-                    href={foll.html_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href={foll.html_url} target="_blank" rel="noopener noreferrer">
                     View {foll.login}
                   </a>
                 </button>
