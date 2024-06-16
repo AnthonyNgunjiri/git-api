@@ -43,6 +43,10 @@ margin-top: 3rem;
   align-items: center;
   
 }
+.content a{
+   text-decoration: none;
+color:#000;
+}
 
 .heading{
    font-size: 3rem;
@@ -163,4 +167,7 @@ font-size:smaller;
          font-size: small;
          gap: 3px;
       
+   }
+   .card2 button a{
+      color: #ccd2da;
    }
