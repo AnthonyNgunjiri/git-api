@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../assets/global.css";
 import { IoLocationOutline } from "react-icons/io5";
-import { FaBook } from "react-icons/fa";
+import { FaBook } from "react-icons/fa"; 
 import { IoIosPeople } from "react-icons/io";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa";
